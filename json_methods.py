@@ -1,88 +1,81 @@
 from typing import Final
-from json_objects import JsonParseError
+from json_objects import *
+from json_core import *
 
 JSON_EXTENTION: Final = "json"
 
+def get_class(cls: type, path: str):
+    """
+    Parameters
+    -------------
+    cls: :class 'type':
+        Class of object.
+    path: :class 'str':
+        Path to file.
 
-def get_json_object(path: str):
+    Returns
+    -------------
+    :class cls:
+        Object that type is :param cls:.
+    """
+
+    with open(path, "r") as f:
+        return to_cls(cls, f.read())
+
+def write_object(ob: object, path: str, indent = 1, in_one_line = True):
+    """
+    Parameters
+    --------------
+    ob: :class 'object':
+        Object to serialize and write.
+    path: :class 'str':
+        Path to file.
+    indent: :class 'int':
+        Indent.
+    in_one_line: :class 'bool':
+        Is write in one line.
+    """
+
+    with open(path, "w") as f:
+        f.write(to_json(ob, indent = indent, in_one_line = in_one_line))
+
+def get_json_object(path: str) -> JsonObject:
     """
     Deserializes json from file and returns a json object.
+
+    Parameters
+    --------------
+    path: :class 'str':
+        File location.
+
+    Returns
+    --------------
+    :class 'JsonObject':
+        Deserialized json object.
     """
+
+    if path[-4:len(path)] != JSON_EXTENTION:
+        raise NotAJsonFileError
 
     with open(path, "r") as file:
-        return __parse(file.read())
+        return JsonObject(parse(file.read()))
 
+class Company:
+    age: int
+    name: str
+    count: int
 
-# I don't know how it work. But it is work!
-def __parse(line: str) -> dict:
-    """
-    First level parsing.
-    """
+class Car:
+    model: str
+    age: int
+    company: Company
 
-    last = ""
-    data = {}
-    counter = 0
-    readingName = False
-    readingValue = False
-    isObject = False
-    value = ""
-    name = ""
-    for ch in line:
-        if ch.isspace(): continue
+class Person:
+    name: str
+    age: int
+    car: Car
+    company: Company
 
-        if last == "":
-            if ch != "{":
-                raise JsonParseError(f"Unexpected token at symbol {counter}, {ch}")
-        else:
-            if (last == "{" or last == "," or readingName) and not readingValue:
-                readingName = True
-                if ch == ":":
-                    readingValue = True
-                    readingName = False
-                else:
-                    name += ch
-            elif readingValue:
-                if ch == "{" and last == ":":
-                    isObject = True
-                if ch == "," or ch == "}":
-                    if ch == "," and isObject:
-                        value += ch
-                    elif isObject:
-                        readingValue = False
-                        value += ch
-                        data[name[1:len(name) - 1]] = value
-                        isObject = False
-                        name = ""
-                        value = ""
-                    else:
-                        readingValue = False
-                        data[name[1:len(name) - 1]] = value
-                        isObject = False
-                        name = ""
-                        value = ""
-                else:
-                    value += ch
-            else:
-                if ch != "," and ch != "}":
-                    raise JsonParseError(f"Unexpected token at symbol {counter}, {ch}, {last}")
-        last = ch
-        print(last)
-        counter += 1
-
-    for i, j in data.items():
-        if j.startswith('{'):
-            data[i] = __parse(j)
-        elif j.startswith("\""):
-            data[i] = j[1:len(j) - 1]
-
-        else:
-            try:
-                data[i] = int(j)
-            except ValueError:
-                if j == "false":
-                    data[i] = False
-                elif j == "true":
-                    data[i] = True
-                else:
-                    raise JsonParseError("Something went wrong.")
-    return data
+if __name__ == "__main__":
+    p = get_json_object("data.json")
+    print(p['car'])
