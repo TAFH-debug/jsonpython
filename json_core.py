@@ -39,6 +39,7 @@ def parse(line: str) -> dict:
     name = ""
 
     for ch in line:
+        input()
         if last == ":" and ch.isspace(): continue
         if ch.isspace() and not reading_value: continue
 
@@ -58,24 +59,19 @@ def parse(line: str) -> dict:
                     str_opened = not str_opened
 
                 if ch == "{" and not str_opened:
+                    print('a')
                     obj_brakets += 1
                 elif ch == "}" and not str_opened:
+                    print('b')
                     obj_brakets -= 1
 
                 if (ch == "," or ch == "}") and not str_opened:
-                    if ch == "," and obj_brakets != 0:
+                    if obj_brakets != 0:
                         value += ch
-                    elif obj_brakets != 0:
-                        reading_value = False
-                        value += ch
-                        data[name[1:len(name) - 1]] = value.strip()
-                        isObject = False
-                        name = ""
-                        value = ""
                     else:
+                        str_opened = False
                         reading_value = False
                         data[name[1:len(name) - 1]] = value.strip()
-                        isObject = False
                         name = ""
                         value = ""
                 else:

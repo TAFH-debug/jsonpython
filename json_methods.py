@@ -77,5 +77,5 @@ class Person:
     company: Company
 
 if __name__ == "__main__":
-    p = get_json_object("data.json")
-    print(p['car'])
+    with open("data.json") as file:
+        print(parse(file.read()))
