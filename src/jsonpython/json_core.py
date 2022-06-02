@@ -1,4 +1,4 @@
-from json_objects import JsonParseError
+from .json_objects import JsonParseError
 
 
 def to_cls(cls: type, line: str | dict):

@@ -1,6 +1,11 @@
-# Jsonpy
+# Jsonpython
 
 ## A package to deserialize and serialize json.
+
+### Installing:
+```shell
+pip install jsonpython
+```
 
 ### Example:
 

@@ -7,14 +7,14 @@ requirements = []
 
 setup(
     name="jsonpython",
-    version="0.0.2",
+    version="0.0.4",
     author="TAFH-debug",
     author_email="aushahman2007@gmail.com",
     description="A package to deserialize and serialize json files.",
     long_description=readme,
     long_description_content_type="text/markdown",
     url="https://github.com/TAFH-debug/jsonpy",
-    packages=find_packages(),
+    packages=["jsonpython"],
     install_requires=requirements,
     license="LICENSE",
     classifiers=[

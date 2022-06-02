@@ -1,6 +1,6 @@
 from typing import Final
-from json_objects import *
-from json_core import *
+from .json_objects import *
+from .json_core import *
 
 JSON_EXTENTION: Final = "json"
 
