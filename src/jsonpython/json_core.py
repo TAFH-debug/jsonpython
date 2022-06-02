@@ -40,8 +40,10 @@ def parse(line: str) -> dict:
 
     for ch in line:
         input()
-        if last == ":" and ch.isspace(): continue
-        if ch.isspace() and not reading_value: continue
+        if last == ":" and ch.isspace():
+            continue
+        if ch.isspace() and not reading_value:
+            continue
 
         if last == "":
             if ch != "{":

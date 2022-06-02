@@ -6,9 +6,9 @@ with open("README.md", "r") as readme_file:
 requirements = []
 
 setup(
-    name="jsonpy",
-    version="0.0.1",
-    author="TAFH",
+    name="jsonpython",
+    version="0.0.2",
+    author="TAFH-debug",
     author_email="aushahman2007@gmail.com",
     description="A package to deserialize and serialize json files.",
     long_description=readme,
@@ -16,8 +16,11 @@ setup(
     url="https://github.com/TAFH-debug/jsonpy",
     packages=find_packages(),
     install_requires=requirements,
+    license="LICENSE",
     classifiers=[
-        "Programming Language :: Python :: 3.10",
-        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
     ],
+    package_dir={"": "src"}
 )

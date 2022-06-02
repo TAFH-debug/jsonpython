@@ -1,10 +1,10 @@
-#Jsonpy
+# Jsonpy
 
-##A package to deserialize and serialize json.
+## A package to deserialize and serialize json.
 
-###Example:
+### Example:
 
-####data.json
+#### data.json
 ```json
 {
   "name": "Alex",
@@ -19,29 +19,34 @@
 }
 ```
 
-####main.py
+#### main.py
+
 ```python
-from jsonpy import *
+from src.jsonpython import *
 
 jobj = get_json_object("data.json")
 
-print(jobj['name']) #Alex
-print(jobj['car']['model']) #Tesla X
+print(jobj['name'])  # Alex
+print(jobj['car']['model'])  # Tesla X
+
 
 class Company:
     name: str
-    
+
+
 class Car:
     model: str
     cost: int
     company: Company
-    
+
+
 class Person:
     age: int
     name: str
     car: Car
 
+
 person = get_class(Person, "data.json")
 
-print(person.car.model) #Tesla X
+print(person.car.model)  # Tesla X
 ```
