@@ -1,6 +1,22 @@
 from .parser import parse
 
 
+def to_json(ob: object) -> str:
+    """
+    Parameters
+    ---------------
+    ob: :class 'object':
+        Object that you want to serialize.
+
+    Returns
+    ---------------
+    :class 'str':
+        Serialized json string.
+    """
+
+    return str(vars(ob))
+
+
 def to_cls(cls: type, line: str | dict):
     new = cls.__new__(cls)
     if isinstance(line, dict):
