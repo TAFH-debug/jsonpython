@@ -1,11 +1,8 @@
-from typing import Final
 from .json_objects import *
 from .json_core import *
 
-JSON_EXTENTION: Final = "json"
 
-
-def get_class(cls: type, path: str):
+def from_file(cls: type, path: str):
     """
     Parameters
     -------------
@@ -57,32 +54,5 @@ def get_json_object(path: str) -> JsonObject:
         Deserialized json object.
     """
 
-    if path[-4:len(path)] != JSON_EXTENTION:
-        raise NotAJsonFileError
-
     with open(path, "r") as f:
         return JsonObject(parse(f.read()))
-
-
-class Company:
-    age: int
-    name: str
-    count: int
-
-
-class Car:
-    model: str
-    age: int
-    company: Company
-
-
-class Person:
-    name: str
-    age: int
-    car: Car
-    company: Company
-
-
-if __name__ == "__main__":
-    with open("data.json") as file:
-        print(parse(file.read()))

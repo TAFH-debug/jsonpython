@@ -1,13 +1,11 @@
-class JsonParseError(Exception): pass
-
-
-class NotAJsonFileError(OSError): pass
-
-
-def to_json(ob: object, indent = 1, in_one_line = True, **kwargs) -> str:
+def to_json(ob: object, indent=1, in_one_line=True, **kwargs) -> str:
     """
     Parameters
     ---------------
+    indent: :class 'int':
+        Indent in json string.
+    in_one_line: :class 'bool':
+        If true json string be wrote in one line.
     ob: :class 'object':
         Object that you want to serialize.
 
@@ -39,8 +37,10 @@ def to_json(ob: object, indent = 1, in_one_line = True, **kwargs) -> str:
         result += "]"
     else:
         a = None
-        if isinstance(ob, dict): a = ob
-        else: a = vars(ob)
+        if isinstance(ob, dict):
+            a = ob
+        else:
+            a = vars(ob)
         result = JsonObject(a).serialize(indent, in_one_line, **kwargs)
 
     return result
@@ -71,9 +71,10 @@ class JsonObject:
             if in_one_line:
                 result += " " * indent + f"\"{i}\": {to_json(j, indent, in_one_line)},"
             elif issub:
-                result += "\n" + " " * (indent * kwargs['sub'] + indent) + f"\"{i}\": {to_json(j, indent,in_one_line, sub = kwargs['sub'] + 1)},"
+                result += "\n" + " " * (indent * kwargs[
+                    'sub'] + indent) + f"\"{i}\": {to_json(j, indent, in_one_line, sub=kwargs['sub'] + 1)},"
             else:
-                result += "\n" + " " * indent + f"\"{i}\": {to_json(j, indent, in_one_line, sub = 2)},"
+                result += "\n" + " " * indent + f"\"{i}\": {to_json(j, indent, in_one_line, sub=2)},"
 
         result = result[0:len(result) - 1]
 
