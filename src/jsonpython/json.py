@@ -1,6 +1,23 @@
 from .json_core import *
 
 
+def get_json_object(path: str):
+    """
+    Parameters
+    -------------
+    path: :class 'str':
+        Path to file.
+
+    Returns
+    -------------
+    :class cls:
+        Dict that contains data from file.
+    """
+
+    with open(path, "r") as f:
+        return parse(f.read())
+
+
 def from_file(cls: type, path: str):
     """
     Parameters

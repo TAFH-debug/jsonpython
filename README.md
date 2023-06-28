@@ -27,7 +27,7 @@ pip install jsonpython
 #### main.py
 
 ```python
-from src.jsonpython import *
+from jsonpython import *
 
 jobj = get_json_object("data.json")
 
@@ -51,7 +51,7 @@ class Person:
     car: Car
 
 
-person = get_class(Person, "data.json")
+person = to_cls(Person, "data.json")
 
 print(person.car.model)  # Tesla X
 ```

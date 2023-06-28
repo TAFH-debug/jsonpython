@@ -7,7 +7,7 @@ requirements = []
 
 setup(
     name="jsonpython",
-    version="0.0.4",
+    version="0.0.7",
     author="TAFH-debug",
     author_email="aushahman2007@gmail.com",
     description="A package to deserialize and serialize json files.",

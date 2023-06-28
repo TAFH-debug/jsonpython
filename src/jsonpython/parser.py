@@ -1,5 +1,6 @@
 CLOSING_TOKENS = [",", "}", "]"]
 
+
 class JsonParseError(Exception):
     pass
 
