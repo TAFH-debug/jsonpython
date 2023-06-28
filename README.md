@@ -51,7 +51,7 @@ class Person:
     car: Car
 
 
-person = to_cls(Person, "data.json")
+person = from_file(Person, "data.json")
 
 print(person.car.model)  # Tesla X
 ```
